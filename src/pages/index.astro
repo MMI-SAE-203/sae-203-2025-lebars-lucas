@@ -1,11 +1,84 @@
 ---
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
+<Layout title="Ma page avec menu dynamique">
+	
+	<header class="bg-orange-600 rounded-bl-4xl rounded-br-4xl">
+		<nav class="flex items-center justify-between p-4">
+		  <!-- Bouton de menu -->
+		  <button id="menu-toggle" class="text-white">
+			<img class="ml-5" src="/src/assets/menu-button.svg" alt="menu-button" />
+		  </button>
+	  
+		  <!-- Logo centré -->
+		  <a href="/" class="flex items-center justify-center mx-auto">
+			<img src="/src/assets/logo-header.svg" alt="logo-header" />
+		  </a>
+		</nav>
+	  
+		<!-- Menu caché par défaut -->
+		<div id="menu-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-orange-600 bg-opacity-50 z-50">
+		  <!-- Bouton de fermeture du menu -->
+		  <button id="close-menu" class="absolute top-20 left-1/2 transform -translate-x-1/2"> <img src="/src/assets/logo-close-menu.svg"> </button>
+	  
+		  <ul id="menu" class="hidden flex flex-col justify-center items-center w-full h-full space-y-8 text-white text-3xl">
+			<li><a href="#">Item 1</a></li>
+			<li><a href="#">Item 2</a></li>
+			<li><a href="#">Item 3</a></li>
+		  </ul>
+		</div>
+	  </header>
+  
+	<!-- Ton composant Welcome -->
 	<Welcome />
-</Layout>
+  
+	<script type="module">
+	  // Toggle le menu sur clic
+	  document.getElementById("menu-toggle").addEventListener("click", function() {
+		const menu = document.getElementById("menu");
+		const overlay = document.getElementById("menu-overlay");
+		const body = document.body;
+  
+		// Toggle l'affichage du menu et de l'overlay
+		menu.classList.toggle("hidden");
+		overlay.classList.toggle("hidden");
+  
+		// Désactiver/activer le défilement du body
+		if (overlay.classList.contains("hidden")) {
+		  body.style.overflow = "auto";  // Réactive le scroll
+		} else {
+		  body.style.overflow = "hidden";  // Désactive le scroll
+		}
+	  });
+  
+	  // Fermer le menu en cliquant sur le bouton de fermeture
+	  document.getElementById("close-menu").addEventListener("click", function() {
+		const menu = document.getElementById("menu");
+		const overlay = document.getElementById("menu-overlay");
+		const body = document.body;
+  
+		menu.classList.add("hidden");
+		overlay.classList.add("hidden");
+  
+		// Réactiver le défilement du body lorsque le menu est fermé
+		body.style.overflow = "auto";
+	  });
+  
+	  // Fermer le menu en cliquant à l'extérieur (sur l'overlay)
+	  document.getElementById("menu-overlay").addEventListener("click", function(e) {
+		if (e.target === this) {
+		  const menu = document.getElementById("menu");
+		  const overlay = document.getElementById("menu-overlay");
+		  const body = document.body;
+  
+		  menu.classList.add("hidden");
+		  overlay.classList.add("hidden");
+  
+		  // Réactiver le défilement du body lorsque le menu est fermé
+		  body.style.overflow = "auto";
+		}
+	  });
+	</script>
+  </Layout>
