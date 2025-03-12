@@ -1,11 +1,18 @@
 ---
+import CardPartenaires from '../components/CardPartenaires.astro';
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { SortallPartenaires } from '../../backend/backend.mjs';
+
+const Partenaires = await SortallPartenaires();
 ---
 
-<Layout title="Ma page avec menu dynamique">
-	
+<Layout title="Festiv'Halloween">
+	<head>
+		<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+	</head>
 	<header class="bg-orange-600 rounded-bl-4xl rounded-br-4xl">
+		
 		<nav class="flex items-center justify-between p-4">
 		  <!-- Bouton de menu -->
 		  <button id="menu-toggle" class="text-white">
@@ -23,17 +30,133 @@ import Layout from '../layouts/Layout.astro';
 		  <!-- Bouton de fermeture du menu -->
 		  <button id="close-menu" class="absolute top-20 left-1/2 transform -translate-x-1/2"> <img src="/src/assets/logo-close-menu.svg"> </button>
 	  
-		  <ul id="menu" class="hidden flex flex-col justify-center items-center w-full h-full space-y-8 text-white text-3xl">
-			<li><a href="#">Item 1</a></li>
+		  <ul id="menu" class="hidden flex flex-col justify-center items-center w-full h-full space-y-8 text-3xl">
+			<li><a href="#" class="font-menuli">Item 1</a></li>
 			<li><a href="#">Item 2</a></li>
+			<li><a href="#">Item 3</a></li>
+			<li><a href="#">Item 3</a></li>
 			<li><a href="#">Item 3</a></li>
 		  </ul>
 		</div>
 	  </header>
   
-	<!-- Ton composant Welcome -->
-	<Welcome />
+	  <body>
+	  <div class="flex justify-center pt-5 ">
+	<img src="/src/assets/accueil-img.png" alt="hero-image" class="w-300px h-300px" />
+  </div>
+
+  <div class="flex justify-center pb-10 pt-10">
+	<button class="bg-orange-600 text-gray-900 font-bold py-3 px-6 rounded-lg text-xl shadow-lg 
+				   border-4 border-gray-900 transition-transform transform hover:scale-110 
+				   hover:bg-orange-700 hover:shadow-orange-500 glow">
+	  <h1>Entrez... si vous l'osez ! </h1>
+	</button>
+  </div>
   
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 py-10">
+  
+
+	<!-- Carte festival -->
+	<div class="bg-gray-900 text-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
+		<img src="/src/assets/festival-img.png" alt="Infos pratiques" class="mx-auto mb-4 w-20 h-20">
+		<h2 class="text-2xl font-bold text-orange-500">Le festival</h2>
+		<p class="mt-2 text-gray-300">Accédez aux informations sur le festival.</p>
+		<a href="/infos-pratiques" class="inline-block mt-4 bg-orange-600 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+		  Voir plus
+		</a>
+	  </div>
+
+	<!-- Carte Programme -->
+	<div class="bg-gray-900 text-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
+	  <img src="/src/assets/programme.webp" alt="Programme" class="mx-auto mb-4 w-20 h-20">
+	  <h2 class="text-2xl font-bold text-orange-500">Programme</h2>
+	  <p class="mt-2 text-gray-300">Découvrez les événements et animations prévues.</p>
+	  <a href="/programme" class="inline-block mt-4 bg-orange-600 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+		Voir plus
+	  </a>
+	</div>
+  
+	<!-- Carte Invités -->
+	<div class="bg-gray-900 text-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
+	  <img src="/src/assets/invites.webp" alt="Invités" class="mx-auto mb-4 w-20 h-20">
+	  <h2 class="text-2xl font-bold text-orange-500">Invités</h2>
+	  <p class="mt-2 text-gray-300">Découvrez les personnalités présentes.</p>
+	  <a href="/invites" class="inline-block mt-4 bg-orange-600 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+		Voir plus
+	  </a>
+	</div>
+  
+	<!-- Carte Infos Pratiques -->
+	<div class="bg-gray-900 text-white rounded-xl shadow-lg p-6 text-center transform transition duration-300 hover:scale-105">
+	  <img src="/src/assets/infos.webp" alt="Infos pratiques" class="mx-auto mb-4 w-20 h-20">
+	  <h2 class="text-2xl font-bold text-orange-500">Infos Pratiques</h2>
+	  <p class="mt-2 text-gray-300">Accédez aux horaires et détails logistiques.</p>
+	  <a href="/infos-pratiques" class="inline-block mt-4 bg-orange-600 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+		Voir plus
+	  </a>
+	</div>
+
+  
+  </section>
+
+
+  <main class="container mx-auto p-4">
+	{Partenaires.length > 0 ? (
+	  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+		{Partenaires.map((Partenaires) => (
+		  <CardPartenaires {...Partenaires} />
+		))}
+	  </div>
+	) : (
+	  <p class="text-gray-600 text-center">
+		Aucune programmation disponible pour le moment.
+	  </p>
+	)}
+  </main>
+
+	  
+  
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <style>
+	@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+  
+	.glow {
+	  transition: box-shadow 0.3s ease-in-out;
+	}
+  
+	.glow:hover {
+	  box-shadow: 0 0 15px #ff8000, 0 0 25px #ff4000;
+	}
+
+  </style>
+
+
+
+
+
+
+
+
+
+
+</body>
 	<script type="module">
 	  // Toggle le menu sur clic
 	  document.getElementById("menu-toggle").addEventListener("click", function() {
