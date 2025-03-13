@@ -1,0 +1,11 @@
+---
+const {...Films } = Astro.props;
+---
+
+<div class="max-w-sm lg:max-w-md rounded-lg overflow-hidden shadow-lg bg-black text-white transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl">
+    <img class="w-full h-64 object-cover" src={Films.imgUrl} alt="Film Poster">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold text-orange-500">{Films.Titre_film}</h2>
+        <p class="text-sm text-gray-400 mb-2">{Films.diffusion_film}</p>
+    </div>
+</div>

@@ -1,14 +1,19 @@
 ---
 const {...Partenaires } = Astro.props;
+console.log(Partenaires)
 ---
 
-<div class="max-w-xs rounded overflow-hidden shadow-lg bg-black text-white hover:bg-orange-600 transition-all duration-300 ease-in-out">
-    <a href={Partenaires.url_partenaires} target="_blank" rel="noopener noreferrer">
-      <div class="flex justify-center p-4">
-        <img class="w-24 h-24 object-contain filter drop-shadow-lg" src={Partenaires.logo_partenaires}  />
-      </div>
-      <div class="px-6 py-4 text-center">
-        <h3 class="font-bold text-xl text-orange-400">{Partenaires.nom_partenaires}</h3>
-      </div>
-    </a>
-  </div>
+<div class="max-w-xs rounded overflow-hidden shadow-lg bg-black text-white  hover:bg-orange-600 transition-all duration-300 ease-in-out ">
+  <a href={Partenaires.url_partenaires} target="_blank" rel="noopener noreferrer">
+    <div class="flex justify-center p-4">
+      <img 
+        class="w-24 h-24 object-contain filter drop-shadow-lg" 
+        src={Partenaires.imgUrl} 
+        alt={Partenaires.nom_partenaires} 
+      />
+    </div>
+    <div class="px-6 py-4 text-center">
+      <h3 class="font-bold text-xl text-orange-400">{Partenaires.nom_partenaires}</h3>
+    </div>
+  </a>
+</div>
