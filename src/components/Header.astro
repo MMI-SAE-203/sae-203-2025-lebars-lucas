@@ -1,76 +1,59 @@
 <header class="bg-orange-600 rounded-bl-4xl rounded-br-4xl">
-		
-    <nav class="flex items-center justify-between p-4">
-      <!-- Bouton de menu -->
-      <button id="menu-toggle" class="text-white">
-        <img class="ml-5" src="/src/assets/menu-button.svg" alt="menu-button" />
-      </button>
+	<nav class="flex items-center justify-between p-4">
+	  <!-- Bouton de menu (caché en desktop) -->
+	  <button id="menu-toggle" class="text-white lg:hidden">
+		<img class="ml-5" src="/src/assets/menu-button.svg" alt="menu-button" />
+	  </button>
   
-      <!-- Logo centré -->
-      <a href="/" class="flex items-center justify-center mx-auto">
-        <img src="/src/assets/logo-header.svg" alt="logo-header" />
-      </a>
-    </nav>
+	  <!-- Logo centré -->
+	  <a href="/" class="flex items-center justify-center flex-grow lg:flex-none">
+		<img src="/src/assets/logo-header.svg" alt="logo-header" />
+	  </a>
   
-    <!-- Menu caché par défaut -->
-    <div id="menu-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-orange-600 bg-opacity-50 z-50">
-      <!-- Bouton de fermeture du menu -->
-      <button id="close-menu" class="absolute top-20 left-1/2 transform -translate-x-1/2"> <img src="/src/assets/logo-close-menu.svg"> </button>
+	  <!-- Menu (visible en desktop, caché par défaut en mobile) -->
+	  <ul id="menu" class="hidden lg:flex space-x-6 text-black font-bold text-lg">
+		<li><a href="/festival">L’âme du Festival</a></li>
+		<li><a href="/Programmes">La Sélection Horrifique</a></li>
+		<li><a href="/activites">Activités à venir</a></li>
+		<li><a href="#">Item 3</a></li>
+		<li><a href="#">Item 4</a></li>
+	  </ul>
+	</nav>
   
-      <ul id="menu" class="hidden flex flex-col justify-center items-center w-full h-full space-y-8 text-3xl font-bold">
-        <li><a href="/festival"> L’âme du Festival</a></li>
-        <li><a href="/Programmes">La Sélection Horrifique</a></li>
-        <li><a href="/activites">Activités à venir</a></li>
-        <li><a href="#">Item 3</a></li>
-        <li><a href="#">Item 3</a></li>
-      </ul>
-    </div>
+	<!-- Menu mobile (overlay caché par défaut) -->
+	<div id="menu-overlay" class="hidden fixed inset-0 bg-orange-600 bg-opacity-90 z-50 flex flex-col items-center justify-center">
+	  <!-- Bouton de fermeture -->
+	  <button id="close-menu" class="absolute top-10 right-10">
+		<img src="/src/assets/logo-close-menu.svg" alt="close-menu">
+	  </button>
+  
+	  <!-- Liens du menu -->
+	  <ul class="flex flex-col space-y-6 text-white text-2xl font-bold">
+		<li><a href="/festival">L’âme du Festival</a></li>
+		<li><a href="/Programmes">La Sélection Horrifique</a></li>
+		<li><a href="/activites">Activités à venir</a></li>
+		<li><a href="#">Item 3</a></li>
+		<li><a href="#">Item 4</a></li>
+	  </ul>
+	</div>
   </header>
-
+  
   <script type="module">
-	  // Toggle le menu sur clic
-	  document.getElementById("menu-toggle").addEventListener("click", function() {
-		const menu = document.getElementById("menu");
-		const overlay = document.getElementById("menu-overlay");
-		const body = document.body;
+	// Gestion de l'ouverture/fermeture du menu mobile
+	document.getElementById("menu-toggle").addEventListener("click", function() {
+	  document.getElementById("menu-overlay").classList.toggle("hidden");
+	  document.body.style.overflow = "hidden";
+	});
   
-		// Toggle l'affichage du menu et de l'overlay
-		menu.classList.toggle("hidden");
-		overlay.classList.toggle("hidden");
+	document.getElementById("close-menu").addEventListener("click", function() {
+	  document.getElementById("menu-overlay").classList.add("hidden");
+	  document.body.style.overflow = "auto";
+	});
   
-		// Désactiver/activer le défilement du body
-		if (overlay.classList.contains("hidden")) {
-		  body.style.overflow = "auto";  // Réactive le scroll
-		} else {
-		  body.style.overflow = "hidden";  // Désactive le scroll
-		}
-	  });
-  
-	  // Fermer le menu en cliquant sur le bouton de fermeture
-	  document.getElementById("close-menu").addEventListener("click", function() {
-		const menu = document.getElementById("menu");
-		const overlay = document.getElementById("menu-overlay");
-		const body = document.body;
-  
-		menu.classList.add("hidden");
-		overlay.classList.add("hidden");
-  
-		// Réactiver le défilement du body lorsque le menu est fermé
-		body.style.overflow = "auto";
-	  });
-  
-	  // Fermer le menu en cliquant à l'extérieur (sur l'overlay)
-	  document.getElementById("menu-overlay").addEventListener("click", function(e) {
-		if (e.target === this) {
-		  const menu = document.getElementById("menu");
-		  const overlay = document.getElementById("menu-overlay");
-		  const body = document.body;
-  
-		  menu.classList.add("hidden");
-		  overlay.classList.add("hidden");
-  
-		  // Réactiver le défilement du body lorsque le menu est fermé
-		  body.style.overflow = "auto";
-		}
-	  });
-	</script>
+	document.getElementById("menu-overlay").addEventListener("click", function(e) {
+	  if (e.target === this) {
+		this.classList.add("hidden");
+		document.body.style.overflow = "auto";
+	  }
+	});
+  </script>
