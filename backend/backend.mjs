@@ -30,6 +30,11 @@ export async function allPartenaires() {
                 let records = await pb.collection('Activites').getFullList({sort: 'date_activite'}) ;
                 return records ;
                 }
+
+                export async function Sortinvites() {
+                    let records = await pb.collection('Invite').getFullList({sort: 'nom_prenom_invite'}) ;
+                    return records ;
+                    }
     
 
         export async function allFilms() {
@@ -101,6 +106,18 @@ export async function allPartenaires() {
                 let event = await pb.collection("Films").getOne(id);
                 event.img = pb.files.getURL(event, event.img_film);
                 return event;
+            } catch (error) {
+                console.log(error);
+                
+                return null;
+            }
+        }
+
+        export async function getOneEventinvite(id) {
+            try {
+                let invit = await pb.collection("Invite").getOne(id);
+                invit.img = pb.files.getURL(invit, invit.image_invite);
+                return invit;
             } catch (error) {
                 console.log(error);
                 

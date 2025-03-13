@@ -1,0 +1,15 @@
+---
+const {...Invites } = Astro.props;
+---
+
+<div class="max-w-sm lg:max-w-md rounded-lg overflow-hidden shadow-lg bg-black text-white transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold text-orange-500">{Invites.nom_prenom_invite}</h2>
+        <p class="text-sm text-gray-400 mb-1">📅 Présence : {Invites.date_heure_presence_invite}</p>
+        <p class="text-sm text-gray-400 mb-2">⏳ Durée : {Invites.duree_presence_invite}</p>
+        <!-- Bouton "En savoir plus" -->
+        <a href={`/Invites/${Invites.id}`} class="inline-block mt-3 px-4 py-2 text-white bg-orange-500 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-colors duration-300">
+            En savoir plus
+        </a>
+    </div>
+</div>
