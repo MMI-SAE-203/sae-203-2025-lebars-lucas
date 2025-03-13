@@ -25,6 +25,11 @@ export async function allPartenaires() {
             );
             return records ;
             }
+
+            export async function Sortallactivite() {
+                let records = await pb.collection('Activites').getFullList({sort: 'date_activite'}) ;
+                return records ;
+                }
     
 
         export async function allFilms() {
