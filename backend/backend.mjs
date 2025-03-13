@@ -90,3 +90,13 @@ export async function allPartenaires() {
             }
             return record;
         }
+
+        export async function getOneEvent(id) {
+            try {
+                let event = await pb.collection("Films").getOne(id);
+                event.img = pb.files.getURL(event, Films.imgUrl);
+                return event;
+            } catch (error) {
+                return null;
+            }
+        }

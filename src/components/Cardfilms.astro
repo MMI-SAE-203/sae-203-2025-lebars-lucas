@@ -7,5 +7,9 @@ const {...Films } = Astro.props;
     <div class="p-4">
         <h2 class="text-2xl font-bold text-orange-500">{Films.Titre_film}</h2>
         <p class="text-sm text-gray-400 mb-2">{Films.diffusion_film}</p>
+        <!-- Bouton "En savoir plus" -->
+        <a href=`../pages/films/${Films.id}` class="inline-block mt-3 px-4 py-2 text-white bg-orange-500 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-colors duration-300">
+            En savoir plus
+        </a>
     </div>
 </div>
