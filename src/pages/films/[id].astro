@@ -12,9 +12,27 @@ if (!event) { // Si l'événement n'existe pas dans la collection pocketbase ou 
 ---
 
 <Layout title={event?.Titre_film}>
-    <img src={event?.imgUrl} alt=image class="w-80 h-80 object-cover" />
-    <p set:html={event?.Description_film}></p>
-    <p>{event.date_sortie_film}</p>
-    <p>{event.diffusion_film}</p>
-    <p>{event.bande_annonce_film}</p>
+    <div class="flex justify-center items-center min-h-screen p-4">
+        <div class="w-full max-w-3xl lg:max-w-4xl transition-all duration-300 ease-in-out transform hover:scale-105">
+            <img class="w-full h-96 object-cover rounded-t-lg" src={event.img} alt="Poster" />
+            <div class="p-6">
+                <h2 class="text-3xl font-bold text-orange-500">{event.Titre_film}</h2>
+                <p class="text-base text-gray-700 mt-4">{event.Description_film}</p>
+                
+                <a href={event.bande_annonce_film} 
+                class="text-lg text-orange-500 hover:text-orange-400 underline block mt-4" 
+                   target="_blank">
+                    Regarder la bande-annonce
+                </a>
+                
+                <div class="mt-6 text-base text-gray-700">
+                    <p><strong>Durée :</strong> {event.Duree_film}</p>
+                    <p><strong>Langue :</strong> {event.Langue_film}</p>
+                    <p><strong>Invité associé :</strong> {event.Invite_associe}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </Layout>

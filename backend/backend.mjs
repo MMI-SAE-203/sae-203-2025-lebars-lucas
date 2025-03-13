@@ -94,9 +94,11 @@ export async function allPartenaires() {
         export async function getOneEvent(id) {
             try {
                 let event = await pb.collection("Films").getOne(id);
-                event.img = pb.files.getURL(event, Films.imgUrl);
+                event.img = pb.files.getURL(event, event.img_film);
                 return event;
             } catch (error) {
+                console.log(error);
+                
                 return null;
             }
         }
