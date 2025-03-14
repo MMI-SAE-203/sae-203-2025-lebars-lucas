@@ -12,6 +12,16 @@ export default defineConfig({
 
   },
 
+  adapter: netlify({
+    imageCDN: false,
+  }),
+  image: {
+    domains: ['example.com'],
+  },
+
   output:"server",
-  adapter: netlify()
+  
+
+  
 });
+
