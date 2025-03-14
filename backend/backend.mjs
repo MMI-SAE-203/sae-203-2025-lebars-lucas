@@ -1,5 +1,5 @@
 import PocketBase from "pocketbase";
-const pb = new PocketBase("http://127.0.0.1:8090");
+const pb = new PocketBase("https://sae203.lucas-lebars.fr:443");
 
 export async function allPartenaires() {
     const records = await pb.collection('Partenaires').getFullList() ;
