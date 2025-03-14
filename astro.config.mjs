@@ -16,7 +16,7 @@ export default defineConfig({
     imageCDN: false,
   }),
   image: {
-    domains: ['example.com'],
+    domains: ['https://sae203.lucas-lebars.fr'],
   },
 
   output:"server",
